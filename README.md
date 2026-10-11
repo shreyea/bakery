@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Humble Crumble: bakery website (design mock-up)
 
-## Getting Started
+A mobile-first, single-page website for a neighbourhood bakery in Panaji, Goa.
+Built with Next.js 14, Tailwind CSS and TypeScript. It is an enquiry site, not a shop: every
+"order" action goes to WhatsApp or a phone call.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (static)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Change the content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Almost everything lives in **`src/lib/site.ts`**: phone and WhatsApp number, address, hours,
+menu items and prices, reviews, FAQs and the bake schedule.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| What                          | Where                      |
+| ----------------------------- | -------------------------- |
+| Colours, fonts                | `tailwind.config.ts`, `src/app/layout.tsx` |
+| Buttons, form fields, spacing | `src/app/globals.css` |
+| Order of sections             | `src/app/page.tsx`         |
+| Individual sections           | `src/components/*`         |
+| Photos                        | `public/images/*.webp`     |
 
-## Learn More
+**WhatsApp:** set `site.whatsapp` (country code + number, digits only, e.g. `919876543210`).
+Every "Ask on WhatsApp" button opens a chat with a message already typed for that item,
+and the "Plan your cake" form turns its answers into one message.
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Photos** are stock images (Unsplash), already resized and compressed to WebP (about 1.4 MB in
+  total, 20-150 KB each). Swap in the client's own photos with the same file names, or edit
+  the paths in `site.ts`. Use roughly 520 px square for menu items and 680 px wide for the large photos.
+- **Sample content:** names, address, phone number, prices, reviews and the FSSAI number are placeholders.
+- **Zomato and Swiggy:** the links in `site.ts` (`delivery`) are generic city pages. Replace them with the bakery's own
+  restaurant pages. The buttons show the names in brand colours as text, not the official logos.
+- Instagram links point to `#` until the real profile is known.
+- No cart, no backend, no tracking.

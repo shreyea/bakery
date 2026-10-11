@@ -2,26 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    @apply bg-cream font-sans text-cocoa antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-medium text-cocoa;
+    letter-spacing: -0.02em;
+  }
+
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  ::selection {
+    @apply bg-marigold/40 text-cocoa;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-terracotta;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .section {
+    @apply py-16 sm:py-24 lg:py-28;
+  }
+
+  /* Small label above headings */
+  .kicker {
+    @apply text-[0.74rem] font-semibold uppercase tracking-[0.16em] text-terracotta;
+  }
+
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-full px-6 text-[0.95rem] font-semibold transition duration-200 ease-out active:scale-[0.98];
+  }
+  .btn-wa {
+    @apply bg-wa text-white hover:bg-wa-dark;
+  }
+  .btn-dark {
+    @apply bg-cocoa text-cream hover:bg-terracotta;
+  }
+  .btn-outline {
+    @apply border border-cocoa/40 text-cocoa hover:border-cocoa hover:bg-cocoa hover:text-cream;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-line bg-paper px-4 py-3 text-[0.95rem] text-cocoa transition placeholder:text-muted/55 focus:border-terracotta focus:outline-none focus:ring-4 focus:ring-marigold/30;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
