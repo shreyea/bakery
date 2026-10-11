@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, Phone, X } from "lucide-react";
 import { nav, site, waLink } from "@/lib/site";
 import { useLockBody } from "@/lib/useLockBody";
@@ -9,6 +11,10 @@ import WhatsAppIcon from "./WhatsAppIcon";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // On inner pages, put a "Home" link first so there's always an obvious way back.
+  const links = pathname === "/" ? nav : [{ label: "Home", href: "/" }, ...nav];
 
   useLockBody(open);
 
@@ -44,20 +50,20 @@ export default function Header() {
         }`}
       >
         <div className="wrap flex h-[66px] items-center justify-between gap-4 lg:h-[74px]">
-          <a href="#top" aria-label={`${site.name}, home`} className="shrink-0">
+          <Link href="/" aria-label={`${site.name}, home`} className="shrink-0">
             <Logo />
-          </a>
+          </Link>
 
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-1">
-              {nav.map((n) => (
+              {links.map((n) => (
                 <li key={n.href}>
-                  <a
+                  <Link
                     href={n.href}
                     className="rounded-full px-4 py-2.5 text-[0.93rem] font-semibold text-cocoa/75 transition hover:bg-butter hover:text-cocoa"
                   >
                     {n.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -112,15 +118,15 @@ export default function Header() {
 
           <nav className="wrap flex flex-1 flex-col justify-center overflow-y-auto py-4" aria-label="Mobile">
             <ul>
-              {nav.map((n) => (
+              {links.map((n) => (
                 <li key={n.href} className="border-b border-line">
-                  <a
+                  <Link
                     href={n.href}
                     onClick={() => setOpen(false)}
                     className="block py-4 font-display text-[2rem] leading-none"
                   >
                     {n.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -25,7 +25,7 @@ menu items and prices, reviews, FAQs and the bake schedule.
 | Individual sections           | `src/components/*`         |
 | Photos                        | `public/images/*.webp`     |
 
-**WhatsApp:** set `site.whatsapp` (country code + number, digits only, e.g. `919876543210`).
+**WhatsApp:** set `site.whatsapp` (country code + number, digits only, e.g. `919423677206`).
 Every "Ask on WhatsApp" button opens a chat with a message already typed for that item,
 and the "Plan your cake" form turns its answers into one message.
 

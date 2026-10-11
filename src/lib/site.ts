@@ -9,10 +9,10 @@
 export const site = {
   name: "Humble Crumble",
   tagline: "Bakery & Café",
-  phoneDisplay: "+91 98765 43210",
-  phoneHref: "tel:+919876543210",
+  phoneDisplay: "+91 94236 77206",
+  phoneHref: "tel:+919423677206",
   /** WhatsApp number: country code + number, digits only. */
-  whatsapp: "919876543210",
+  whatsapp: "919423677206",
   email: "hello@humblecrumble.in",
   address: ["Shop 4, Rua de Ourém, Fontainhas", "Panaji, Goa 403001"],
   mapsUrl:
@@ -26,12 +26,13 @@ export const site = {
 export const waLink = (message: string) =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
 
+/** Hash links start with "/" so they also work from the /menu page. */
 export const nav = [
-  { label: "Menu", href: "#menu" },
-  { label: "Cakes", href: "#cakes" },
-  { label: "Our story", href: "#story" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Find us", href: "#visit" },
+  { label: "Menu", href: "/#menu" },
+  { label: "Cakes", href: "/#cakes" },
+  { label: "Our story", href: "/#story" },
+  { label: "Reviews", href: "/#reviews" },
+  { label: "Find us", href: "/#visit" },
 ];
 
 export const img = (name: string) => `/images/${name}.webp`;
@@ -224,6 +225,80 @@ export const products: Product[] = [
     desc: "Yeast-raised and glazed the same morning. Rose or chocolate.",
     image: img("p-donut"),
     alt: "Pink glazed donut with sprinkles",
+  },
+];
+
+/** Intro line for each photo category on the /menu page. */
+export const categoryBlurbs: Record<Category, string> = {
+  Breads: "Baked from 5 am and best the same day. Ask us to slice it for you.",
+  Pastries: "Folded by hand and baked in small batches through the morning.",
+  Cakes: "Priced per ½ kg. Eggless on request, and two days' notice please.",
+  "Cookies & more": "Little things for tea time, gifting and sweet cravings.",
+};
+
+export type ExtraItem = { name: string; desc?: string; price: number; unit?: string };
+
+/** Text-only menu sections shown below the photo categories on /menu. */
+export const extraMenu: {
+  id: string;
+  title: string;
+  blurb: string;
+  items: ExtraItem[];
+}[] = [
+  {
+    id: "goan",
+    title: "Goan favourites",
+    blurb: "The sweets we grew up with. Some are seasonal, so message us before you come.",
+    items: [
+      {
+        name: "Dodol",
+        desc: "Jaggery, coconut milk and rice flour, stirred slowly. Chewy and not too sweet.",
+        price: 120,
+        unit: "/ 100 g",
+      },
+      {
+        name: "Coconut Bolinhas",
+        desc: "Crumbly coconut and semolina cookies, made eggless.",
+        price: 180,
+        unit: "/ box of 6",
+      },
+      {
+        name: "Neureos",
+        desc: "Flaky pastry stuffed with coconut, jaggery and dry fruit. Christmas season.",
+        price: 220,
+        unit: "/ box of 6",
+      },
+      {
+        name: "Plum Cake Slice",
+        desc: "Rich fruit and spice cake, slow-baked. November to January.",
+        price: 150,
+      },
+    ],
+  },
+  {
+    id: "savoury",
+    title: "Savoury",
+    blurb: "For a quick lunch or something with your chai. All vegetarian.",
+    items: [
+      { name: "Veg Puff", desc: "Spiced vegetables in flaky pastry.", price: 60 },
+      { name: "Paneer Tikka Puff", desc: "Tandoori-style paneer with peppers.", price: 90 },
+      { name: "Mushroom & Cheese Quiche", desc: "Eggless tart, baked fresh each morning.", price: 180 },
+      { name: "Garlic Cheese Toast", desc: "Thick sourdough slices, butter and cheese.", price: 140 },
+      { name: "Grilled Veg Sandwich", desc: "On sourdough, with green chutney.", price: 220 },
+    ],
+  },
+  {
+    id: "cafe",
+    title: "Café",
+    blurb: "Hot and cold, to go with whatever you picked.",
+    items: [
+      { name: "Filter Coffee", price: 80 },
+      { name: "Cappuccino", price: 140 },
+      { name: "Café Latte", price: 160 },
+      { name: "Masala Chai", price: 60 },
+      { name: "Cold Coffee", price: 170 },
+      { name: "Fresh Lime Soda", price: 90 },
+    ],
   },
 ];
 

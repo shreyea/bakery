@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import {
   categoryImages,
   featuredIds,
@@ -11,16 +13,10 @@ import {
   type Category,
   type Product,
 } from "@/lib/site";
+import { tagStyle } from "@/lib/tagStyle";
 import SectionHead from "./SectionHead";
 import VegMark from "./VegMark";
 import WhatsAppIcon from "./WhatsAppIcon";
-
-const tagStyle: Record<NonNullable<Product["tag"]>, string> = {
-  Bestseller: "bg-marigold text-cocoa",
-  New: "bg-terracotta text-white",
-  Eggless: "bg-pistadeep text-white",
-  Seasonal: "bg-cocoa text-cream",
-};
 
 const categoryList = Object.keys(categoryImages) as Category[];
 
@@ -65,7 +61,7 @@ function ProductCard({ p }: { p: Product }) {
             href={waLink(productMessage(p))}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full bg-wa/10 px-3 text-[0.82rem] font-semibold text-wa transition hover:bg-wa hover:text-white sm:text-sm"
+            className="mt-3 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full border border-wa/40 px-3 text-[0.82rem] font-semibold text-wa transition hover:bg-wa hover:text-white sm:text-sm"
           >
             <WhatsAppIcon className="size-4" />
             <span className="sm:hidden">WhatsApp</span>
@@ -92,11 +88,17 @@ export default function Menu() {
   return (
     <section id="menu" className="section bg-cream">
       <div className="wrap">
-        <SectionHead
-          kicker="The menu"
-          title="What's on the counter today"
-          text="Pick a category, or scroll through our favourites. Message us before you come to check what's fresh, or to keep something aside."
-        />
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <SectionHead
+            kicker="The menu"
+            title="What's on the counter today"
+            text="Pick a category, or scroll through our favourites. Message us before you come to check what's fresh, or to keep something aside."
+          />
+          <Link href="/menu" className="btn btn-dark shrink-0 self-start lg:mb-2 lg:self-auto">
+            Full menu
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
 
         {/* Category tiles double as filters */}
         <div className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">

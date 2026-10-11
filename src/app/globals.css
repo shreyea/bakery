@@ -68,6 +68,10 @@
     @apply border border-cocoa/40 text-cocoa hover:border-cocoa hover:bg-cocoa hover:text-cream;
   }
 
+  .btn-outline-light {
+    @apply border border-cream/50 text-cream hover:bg-cream hover:text-cocoa;
+  }
+
   .field {
     @apply w-full rounded-xl border border-line bg-paper px-4 py-3 text-[0.95rem] text-cocoa transition placeholder:text-muted/55 focus:border-terracotta focus:outline-none focus:ring-4 focus:ring-marigold/30;
   }
